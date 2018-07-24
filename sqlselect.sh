@@ -11,10 +11,9 @@
 ## If this is the case, the use of this character can be chaged to one not used, on line 31 and 32.
 ##
 
-
 while getopts ":s:o:q:" opt; do
   case $opt in
-    s) server="$OPTARG" >&2
+    s) server="$OPTARG"
     ;;
     o) output="$OPTARG"
     ;;
@@ -29,5 +28,5 @@ query="set nocount on; ${query}"
 out="fmt_${output}"
 
 $(sqlcmd -o "${output}" -j -E -S "${server}" -s '~' -W -Q "${query}")
-$(cat $output | sed -b -E '/^\s*$/d; 2d; s/\xEF\xBB\xBF//; s/~/","/g; s/^/"/g; s/$/"/g' > $out)
+$(cat $output | sed -b -E '/^\s*$/d; 2d; s/\xEF\xBB\xBF//; s/"/""/g; s/~/","/g; s/^/"/g; s/$/"/g' > $out)
 $(rm $output)
