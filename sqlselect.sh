@@ -1,3 +1,17 @@
+##
+## Selects out a result set as a CSV for a given input query.
+## The script requires:
+##      -s server
+##      -o output file name
+##      -q SQL query
+##
+## and assumes the user is a trusted connection (-E flag).
+##
+## The ~ character is used as a field seperator, so will fail on any dataset using this character.
+## If this is the case, the use of this character can be chaged to one not used, on line 31 and 32.
+##
+
+
 while getopts ":s:o:q:" opt; do
   case $opt in
     s) server="$OPTARG" >&2
