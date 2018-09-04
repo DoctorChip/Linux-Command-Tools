@@ -90,3 +90,23 @@ $ means the end of the line.
 /d tells sed to delete the line.
 
 So, we're asking sed to delete the line where, from the start to the end of the line, the line contains only whitespace.
+
+
+
+
+
+### Joining multiple files together
+
+For joining multiple files, you can simply use `cat` (think concatenate). E.g.
+
+`cat fileone.txt filetwo.txt > output.txt`
+
+
+or
+
+`cat *.txt > allfiles.txt`
+
+However, this will not add anything inbetween the files. If for example you're joining text files that make up documentation into a single file, you can use `sed` - all glory to the power of `sed`!
+
+`sed -e '$s/$/\n/' -s *.txt > final.txt`
+This will add a \n to the end of each file in the collection of .txt files in the current directory, outputting to `final.txt`.
